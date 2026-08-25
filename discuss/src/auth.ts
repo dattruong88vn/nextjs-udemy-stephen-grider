@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
-import GitHub from "next-auth/providers/github";
+import Github from "next-auth/providers/github";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import type { Session } from "next-auth";
+import type { AdapterUser } from "next-auth/adapters";
 import { db } from "@/db";
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
@@ -13,22 +15,20 @@ if (!GITHUB_CLIENT_ID || !GITHUB_CLIENT_SECRET) {
 export const {
   handlers: { GET, POST },
   auth,
-  signIn,
   signOut,
+  signIn,
 } = NextAuth({
-  debug: true,
   adapter: PrismaAdapter(db),
   providers: [
-    GitHub({
+    Github({
       clientId: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
-      issuer: "https://github.com/login/oauth",
     }),
-    // other oauth
   ],
   callbacks: {
-    async session({ session, user }: any) {
-      if (session && user) {
+    // Usually not needed, here we are fixing a bug in nextauth
+    async session({ session, user }: { session: Session; user: AdapterUser }) {
+      if (session.user && user) {
         session.user.id = user.id;
       }
 
