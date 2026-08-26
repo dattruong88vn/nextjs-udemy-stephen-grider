@@ -23,6 +23,7 @@ export const {
     Github({
       clientId: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
+      issuer: "https://github.com/login/oauth",
     }),
   ],
   callbacks: {
