@@ -19,7 +19,7 @@ export default function CommentCreateForm({
 }: CommentCreateFormProps) {
   const [open, setOpen] = useState(startOpen);
   const ref = useRef<HTMLFormElement | null>(null);
-  const [formState, action] = useActionState(
+  const [formState, action, isPending] = useActionState(
     actions.createComment.bind(null, { postId, parentId }),
     { errors: {} }
   );
@@ -51,7 +51,7 @@ export default function CommentCreateForm({
           </div>
         ) : null}
 
-        <FormButton>Create Comment</FormButton>
+        <FormButton isLoading={isPending}>Create Comment</FormButton>
       </div>
     </form>
   );
