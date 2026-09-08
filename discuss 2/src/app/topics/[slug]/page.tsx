@@ -1,6 +1,6 @@
-import PostCreateForm from "@/components/posts/post-create-form";
-import PostList from "@/components/posts/post-list";
-import { fetchPostsByTopicSlug } from "@/db/queries/posts";
+import PostCreateForm from '@/components/posts/post-create-form';
+import PostList from '@/components/posts/post-list';
+import { fetchPostsByTopicSlug } from '@/db/queries/posts';
 
 interface TopicShowPageProps {
   params: Promise<{

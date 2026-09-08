@@ -59,7 +59,7 @@ export default function TopicCreateForm() {
               </div>
             ) : null}
 
-            <FormButton isLoading={isPending}>Submit</FormButton>
+            <FormButton isLoading={isPending}>Save</FormButton>
           </div>
         </Form>
       </PopoverContent>

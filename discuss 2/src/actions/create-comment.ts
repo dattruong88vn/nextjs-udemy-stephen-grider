@@ -21,7 +21,7 @@ interface CreateCommentFormState {
 export async function createComment(
   { postId, parentId }: { postId: string; parentId?: string },
   formState: CreateCommentFormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<CreateCommentFormState> {
   const result = createCommentSchema.safeParse({
     content: formData.get("content"),
